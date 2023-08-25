@@ -1,0 +1,59 @@
+managed implementation in class zbp_i_employee_tt unique;
+with draft;
+
+define behavior for ZI_EMPLOYEE_TT alias Empleados_entity
+persistent table zemployee_tt
+draft table zdr_employee_tt
+lock master total etag Lastchangedat
+// Si se llegara a crear una instancia de draft (draft-created) va a generar un lock
+// pesimista, hasta que se guarde o se expire el tiempo. Cuando no haya draft, se activa el control
+// optimista
+// el total etag bloquea toda la instancia y no un solo registro
+// Ejemplo lock: CHaRM
+authorization master ( instance )
+etag master LocalLastChangedAt // logea los cambios segun timestamp, control optimista
+{
+  field ( readonly, numbering : managed ) EmpNumber;
+  field ( readonly ) Category, Lastchangedat, Lastchangedby;
+  create;
+  update;
+  delete;
+  association _Activities { create; }
+  action ( features : instance ) Admit result [1] $self;
+  validation validateStartDate on save { create; update; }
+  determination setCategory on modify { field Role; }
+
+  mapping for zemployee_tt
+  {
+      EmpNumber = emp_number;
+      EmpName = emp_name;
+      EmpLastName = emp_last_name;
+      Role = role;
+      Category = category;
+      Status = status;
+      StartDate = start_date;
+      EndDate = end_date;
+      LocalLastChangedAt = locallastchangedat;
+      Lastchangedat = lastchangedat;
+      Lastchangedby = lastchangedby;
+  }
+}
+
+define behavior for ZI_ACTIVITIES_TT alias Actividades
+persistent table zactivities_tt
+lock dependent by _Employee
+authorization dependent by _Employee
+draft table zdractivities_tt
+{
+    update;
+    delete;
+    association _Employee;
+    field ( readonly ) EmpNumber, ActivityId, Description;
+
+mapping for zactivities_tt
+    {
+        ActivityId = activity_id;
+        EmpNumber = emp_number;
+        Description = description;
+    }
+}

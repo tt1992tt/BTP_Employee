@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition for ZC_EMPLOYEE_TT'
+define service ZSD_EMPLOYEE_TT {
+  expose ZC_EMPLOYEE_TT;
+  expose ZC_ACTIVITIES_TT;
+}

@@ -1,0 +1,50 @@
+@Metadata.layer: #CORE   // Defino prioridad en caso de que hayan varios ME en una CDS
+
+@UI: { headerInfo: { typeName: 'Employee',
+                     typeNamePlural: 'Employees' } }
+
+annotate view ZC_EMPLOYEE_TT with
+{
+
+  @UI.facet: [{id: 'idIdentification',
+               type: #IDENTIFICATION_REFERENCE,
+               label: 'Employees',
+               position: 10 }]
+
+  @UI: { lineItem: [{ position: 10, label: 'Employee Id' }],
+         identification: [{ position: 10, label: 'Employee Id' }]
+     }
+  EmpNumber;
+
+  @UI: { lineItem: [{ position: 20, label: 'Employee Name' }],
+     identification: [{ position: 20, label: 'Employee Name' }]}
+  EmpName;
+
+  @UI: { lineItem: [{ position: 30, label: 'Employee Surname' }],
+     identification: [{ position: 30, label: 'Employee Surname' }]}
+  EmpLastName;
+
+  @UI: { lineItem: [{ position: 40, label: 'Status' },
+       { type: #FOR_ACTION, dataAction: 'Admit', label: 'Admit'  }],
+
+         identification: [{ position: 40, label: 'Status' },
+                          { type: #FOR_ACTION, dataAction: 'Admit', label: 'Admit'} ] }
+  Status;
+
+  @UI: { lineItem: [{ position: 50, label: 'Role' }],
+    identification: [{ position: 50, label: 'Role' }] }
+  Role;
+
+  @UI: { lineItem: [{ position: 60, label: 'Category' }],
+  identification: [{ position: 60, label: 'Category' }] }
+  Category;
+
+  @UI: { lineItem: [{ position: 70, label: 'Start Date' }],
+      identification: [{ position: 70, label: 'Start Date' }] }
+  StartDate;
+
+  @UI: { lineItem: [{ position: 80, label: 'End Date' }],
+    identification: [{ position: 80, label: 'End Date' }] }
+  EndDate;
+
+}
