@@ -1,24 +1,28 @@
 managed implementation in class zbp_i_employee_tt unique;
+strict;
 with draft;
 
 define behavior for ZI_EMPLOYEE_TT alias Empleados_entity
 persistent table zemployee_tt
 draft table zdr_employee_tt
-lock master total etag Lastchangedat
-// Si se llegara a crear una instancia de draft (draft-created) va a generar un lock
-// pesimista, hasta que se guarde o se expire el tiempo. Cuando no haya draft, se activa el control
-// optimista
-// el total etag bloquea toda la instancia y no un solo registro
-// Ejemplo lock: CHaRM
+lock master total etag Lastchangedat // lock pesimista - global
 authorization master ( instance )
-etag master LocalLastChangedAt // logea los cambios segun timestamp, control optimista
+//etag master LocalLastChangedAt // lock optimista - instancia
 {
   field ( readonly, numbering : managed ) EmpNumber;
-  field ( readonly ) Category, Lastchangedat, Lastchangedby;
+  field ( readonly ) icon, Category, Lastchangedat, Lastchangedby;
+
   create;
   update;
   delete;
-  association _Activities { create; }
+  association _Activities { create; with draft; }
+
+  draft action Edit; // son acciones implicitas pero las exige el strict
+  draft action Discard;
+  draft action Activate optimized;
+  draft action Resume;
+  draft determine action Prepare;
+
   action ( features : instance ) Admit result [1] $self;
   validation validateStartDate on save { create; update; }
   determination setCategory on modify { field Role; }
@@ -31,9 +35,9 @@ etag master LocalLastChangedAt // logea los cambios segun timestamp, control opt
       Role = role;
       Category = category;
       Status = status;
+      icon = icon;
       StartDate = start_date;
       EndDate = end_date;
-      LocalLastChangedAt = locallastchangedat;
       Lastchangedat = lastchangedat;
       Lastchangedby = lastchangedby;
   }
@@ -48,12 +52,11 @@ draft table zdractivities_tt
     update;
     delete;
     association _Employee;
-    field ( readonly ) EmpNumber, ActivityId, Description;
+    field ( readonly ) EmpNumber;
+    field ( readonly:update ) ActivityId, Description;
 
-mapping for zactivities_tt
-    {
-        ActivityId = activity_id;
-        EmpNumber = emp_number;
-        Description = description;
-    }
-}
+    mapping for zactivities_tt corresponding {
+    EmpNumber = emp_number;
+    ActivityId = activity_id;
+    Description = description;
+} }

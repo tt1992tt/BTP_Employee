@@ -25,7 +25,7 @@ CLASS lhc_Empleados_entity IMPLEMENTATION.
     READ ENTITIES OF zi_employee_tt
     IN LOCAL MODE
     ENTITY Empleados_entity
-    FIELDS ( Status )
+    FIELDS ( Status icon )
     WITH CORRESPONDING #( keys )
     RESULT DATA(i_status)
     FAILED failed.
@@ -38,6 +38,7 @@ CLASS lhc_Empleados_entity IMPLEMENTATION.
 
                       IN ( %tky = stat-%tky
                            %action-Admit = fc_admit ) ).
+
 
   ENDMETHOD.
 

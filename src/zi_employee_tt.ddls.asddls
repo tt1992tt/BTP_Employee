@@ -10,10 +10,16 @@ define root view entity ZI_EMPLOYEE_TT as select from zemployee_tt
     role as Role,
     category as Category,
     status as Status,
+    cast ( case status
+                when 'A' then
+                'https://raw.githubusercontent.com/tt1992tt/BTP_Employee/main/assets/NicePng_green-dot-png_1061638.png'
+                else 
+                'https://raw.githubusercontent.com/tt1992tt/BTP_Employee/main/assets/reddot.jpg'
+           end as abap.char(1333)) as icon,
     start_date as StartDate,
     end_date as EndDate,
-    @Semantics.systemDateTime.localInstanceLastChangedAt: true
-    locallastchangedat as LocalLastChangedAt,
+//    @Semantics.systemDateTime.localInstanceLastChangedAt: true
+//    locallastchangedat as LocalLastChangedAt,
     @Semantics.systemDateTime.lastChangedAt: true
     lastchangedat as Lastchangedat,
     @Semantics.user.lastChangedBy: true

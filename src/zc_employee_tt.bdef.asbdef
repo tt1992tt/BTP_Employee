@@ -1,5 +1,5 @@
 projection;
-//strict ( 2 ); //Uncomment this line in order to enable strict mode 2. The strict mode has two variants (strict(1), strict(2)) and is prerequisite to be future proof regarding syntax and to be able to release your BO.
+strict;
 use draft;
 
 define behavior for ZC_EMPLOYEE_TT //alias <alias_name>
@@ -9,4 +9,19 @@ define behavior for ZC_EMPLOYEE_TT //alias <alias_name>
   use delete;
 
   use action Admit;
+  use association _Activities { create; with draft;}
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Prepare;
+  use action Resume;
+}
+
+define behavior for ZC_ACTIVITIES_TT
+{
+  use update;
+  use delete;
+
+  use association _Employee { with draft; }
 }

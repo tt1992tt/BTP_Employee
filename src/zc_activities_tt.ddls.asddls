@@ -8,7 +8,7 @@ define view entity ZC_ACTIVITIES_TT as projection on ZI_ACTIVITIES_TT
     key EmpNumber,
     key ActivityId,
     Description,
-    LastChangedAt,
+//    LastChangedAt,
     /* Associations */
     _Employee: redirected to parent ZC_EMPLOYEE_TT
 }

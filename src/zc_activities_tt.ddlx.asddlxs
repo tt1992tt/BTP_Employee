@@ -1,27 +1,18 @@
-@Metadata.layer: #CORE
-
-@UI: { headerInfo: { typeName: 'Activities',
-                     typeNamePlural: 'Activities' } }
-                     
+@Metadata.layer: #CORE                
 annotate view ZC_ACTIVITIES_TT
     with 
-{
-
-  @UI.facet: [{id: 'idIdentification',
-               type: #IDENTIFICATION_REFERENCE,
-               label: 'Employees',
-               position: 10 }]
-               
+{                        
   @UI: { lineItem: [{ position: 10, label: 'Employee Id' }],
          identification: [{ position: 10, label: 'Employee Id' }]
      }
     EmpNumber;
     
   @UI: { lineItem: [{ position: 20, label: 'ActivityId' }],
-         identification: [{ position: 20, label: 'ActivityId' }]}
+         identification: [{ position: 20, label: 'ActivityId' }],
+         selectionField: [{ position: 20, element: 'ActivityId' }]}
     ActivityId;
   @UI: { lineItem: [{ position: 30, label: 'Description' }],
-         identification: [{ position: 30, label: 'Description' }]}
+         identification: [{ position: 30, label: 'Description' }],
+         selectionField: [{ position: 30, element: 'Description' }]}
     Description;
-
 }

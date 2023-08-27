@@ -9,7 +9,7 @@ define view entity ZI_ACTIVITIES_TT as select from zactivities_tt
     key emp_number as EmpNumber,
     key activity_id as ActivityId,
     description as Description,
-    @Semantics.systemDateTime.lastChangedAt: true
-    lastchangedat as LastChangedAt,
+//    @Semantics.systemDateTime.lastChangedAt: true
+//    lastchangedat as LastChangedAt,
     _Employee
 }

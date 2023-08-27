@@ -1,50 +1,63 @@
 @Metadata.layer: #CORE   // Defino prioridad en caso de que hayan varios ME en una CDS
 
 @UI: { headerInfo: { typeName: 'Employee',
-                     typeNamePlural: 'Employees' } }
+                     typeNamePlural: 'Employees',
+                     title: { type: #STANDARD, label: 'Employees' } },
+       presentationVariant: [ { sortOrder: [{by: 'EmpNumber', direction: #ASC}] } ] }
 
 annotate view ZC_EMPLOYEE_TT with
 {
 
-  @UI.facet: [{id: 'idIdentification',
+  @UI.facet: [{id: 'idEmployee',
                type: #IDENTIFICATION_REFERENCE,
                label: 'Employees',
-               position: 10 }]
+               position: 10 },
+
+               { id: 'Activities',
+                 type: #LINEITEM_REFERENCE,
+                 label: 'Activities',
+                 position: 20,
+                 targetElement: '_Activities'}]
 
   @UI: { lineItem: [{ position: 10, label: 'Employee Id' }],
-         identification: [{ position: 10, label: 'Employee Id' }]
-     }
+         identification: [{ position: 10, label: 'Employee Id' }]}
   EmpNumber;
 
   @UI: { lineItem: [{ position: 20, label: 'Employee Name' }],
-     identification: [{ position: 20, label: 'Employee Name' }]}
+     identification: [{ position: 20, label: 'Employee Name' }],
+     selectionField: [{ position: 20 }]}
   EmpName;
 
   @UI: { lineItem: [{ position: 30, label: 'Employee Surname' }],
-     identification: [{ position: 30, label: 'Employee Surname' }]}
+     identification: [{ position: 30, label: 'Employee Surname' }],
+     selectionField: [{ position: 30 }]}
   EmpLastName;
 
   @UI: { lineItem: [{ position: 40, label: 'Status' },
        { type: #FOR_ACTION, dataAction: 'Admit', label: 'Admit'  }],
 
          identification: [{ position: 40, label: 'Status' },
-                          { type: #FOR_ACTION, dataAction: 'Admit', label: 'Admit'} ] }
+                          { type: #FOR_ACTION, dataAction: 'Admit', label: 'Admit'}],
+         selectionField: [{ position: 40 }] }
+         @UI.hidden: true
   Status;
 
-  @UI: { lineItem: [{ position: 50, label: 'Role' }],
-    identification: [{ position: 50, label: 'Role' }] }
+  @UI: { lineItem: [{ position: 50, label: 'Status' }] }
+  icon;
+  @UI: { lineItem: [{ position: 60, label: 'Role' }],
+    identification: [{ position: 60, label: 'Role' }] }
   Role;
 
-  @UI: { lineItem: [{ position: 60, label: 'Category' }],
-  identification: [{ position: 60, label: 'Category' }] }
+  @UI: { lineItem: [{ position: 70, label: 'Category' }],
+  identification: [{ position: 70, label: 'Category' }] }
   Category;
 
-  @UI: { lineItem: [{ position: 70, label: 'Start Date' }],
-      identification: [{ position: 70, label: 'Start Date' }] }
+  @UI: { lineItem: [{ position: 80, label: 'Start Date' }],
+      identification: [{ position: 80, label: 'Start Date' }] }
   StartDate;
 
-  @UI: { lineItem: [{ position: 80, label: 'End Date' }],
-    identification: [{ position: 80, label: 'End Date' }] }
+  @UI: { lineItem: [{ position: 90, label: 'End Date' }],
+    identification: [{ position: 90, label: 'End Date' }] }
   EndDate;
 
 }

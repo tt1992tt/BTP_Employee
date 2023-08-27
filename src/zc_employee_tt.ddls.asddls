@@ -12,9 +12,11 @@ as projection on ZI_EMPLOYEE_TT
     Role,
     Category,
     Status,
+    @Semantics.imageUrl: true
+    icon,
     StartDate,
     EndDate,
-    LocalLastChangedAt,
+//    LocalLastChangedAt,
     Lastchangedat,
     Lastchangedby,
     _Activities: redirected to composition child ZC_ACTIVITIES_TT
