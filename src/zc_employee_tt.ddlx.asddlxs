@@ -3,7 +3,8 @@
 @UI: { headerInfo: { typeName: 'Employee',
                      typeNamePlural: 'Employees',
                      title: { type: #STANDARD, label: 'Employees' } },
-       presentationVariant: [ { sortOrder: [{by: 'EmpNumber', direction: #ASC}] } ] }
+       presentationVariant: [ { sortOrder: [{by: 'EmpNumber', direction: #ASC}] } ]}
+//       badge.imageUrl: 'https://raw.githubusercontent.com/tt1992tt/BTP_Employee/main/assets/acnlogo.jpg' }
 
 annotate view ZC_EMPLOYEE_TT with
 {
@@ -18,6 +19,11 @@ annotate view ZC_EMPLOYEE_TT with
                  label: 'Activities',
                  position: 20,
                  targetElement: '_Activities'}]
+                 
+//                 ,{ id: 'Logo',
+//                   type: #URL_REFERENCE,
+//                   label: 'Accenture',
+//                   position: 30 }]
 
   @UI: { lineItem: [{ position: 10, label: 'Employee Id' }],
          identification: [{ position: 10, label: 'Employee Id' }]}

@@ -101,44 +101,25 @@ CLASS lhc_Empleados_entity IMPLEMENTATION.
 
     LOOP AT i_roles INTO DATA(lw_roles).
 
-      CASE lw_roles-Role.
-        WHEN 'Software Engineer'.
-          MODIFY ENTITIES OF zi_employee_tt
-          IN LOCAL MODE ENTITY Empleados_entity
+      DATA(lv_category) = SWITCH #( lw_roles-Role
+                                    WHEN 'Software Engineer'
+                                        THEN 'IT/Communications'
+                                    WHEN 'Accounting'
+                                        THEN 'Finance/Accounting'
+                                    WHEN 'Lawyer'
+                                        THEN 'Legal'
+                                    WHEN 'Administrative'
+                                        THEN 'Management/Administration'
+                                    ELSE 'Others' ).
+
+      MODIFY ENTITIES OF zi_employee_tt
+          IN LOCAL MODE
+          ENTITY Empleados_entity
           UPDATE FIELDS ( Category )
           WITH VALUE #( ( %tky = lw_roles-%tky
-                         Category = 'IT/Communications' ) ).
-
-        WHEN 'Accounting'.
-          MODIFY ENTITIES OF zi_employee_tt
-              IN LOCAL MODE ENTITY Empleados_entity
-              UPDATE FIELDS ( Category )
-              WITH VALUE #( ( %tky = lw_roles-%tky
-                             Category = 'Finance/Accounting' ) ).
-
-        WHEN 'Lawyer'.
-          MODIFY ENTITIES OF zi_employee_tt
-            IN LOCAL MODE ENTITY Empleados_entity
-            UPDATE FIELDS ( Category )
-            WITH VALUE #( ( %tky = lw_roles-%tky
-                         Category = 'Legal' ) ).
-
-        WHEN 'Administrative'.
-          MODIFY ENTITIES OF zi_employee_tt
-            IN LOCAL MODE ENTITY Empleados_entity
-            UPDATE FIELDS ( Category )
-            WITH VALUE #( ( %tky = lw_roles-%tky
-                          Category = 'Management/Administration' ) ).
-
-        WHEN OTHERS.
-          MODIFY ENTITIES OF zi_employee_tt
-                IN LOCAL MODE ENTITY Empleados_entity
-                UPDATE FIELDS ( Category )
-                WITH VALUE #( ( %tky = lw_roles-%tky
-                              Category = 'Others' ) ).
-
-      ENDCASE.
-      CLEAR lw_roles.
+                         Category = lv_category ) ).
+      CLEAR: lv_category,
+             lw_roles.
     ENDLOOP.
 
   ENDMETHOD.
