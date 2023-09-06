@@ -6,7 +6,9 @@
 define view entity ZC_ACTIVITIES_TT as projection on ZI_ACTIVITIES_TT
 {
     key EmpNumber,
+    @EndUserText.label: 'ActivityId'
     key ActivityId,
+    @EndUserText.label: 'Description'
     Description,
 //    LastChangedAt,
     /* Associations */
