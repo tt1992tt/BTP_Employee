@@ -1,0 +1,57 @@
+@Metadata.layer: #CORE
+
+@UI: { headerInfo: { typeName: 'ZFIBAN',
+                     typeNamePlural: 'ZFIBAN',
+                     title: { type: #STANDARD, label: 'IBAN' }}}
+
+annotate view ZC_BusinessPartnerIBAN with
+{
+  @UI.facet: [{id: 'idZFIBAN',
+            type: #IDENTIFICATION_REFERENCE,
+            label: 'IBAN',
+            position: 10 }]
+
+  @UI: { lineItem: [{ position: 10, label: 'Country/Region Key of Bank' }],
+        identification: [{ position: 10, label: 'Country/Region Key of Bank' }],
+             selectionField: [{ position: 10 }]}
+  Banks;
+
+  @UI: { lineItem: [{ position: 20, label: 'Bank Keys' }],
+     identification: [{ position: 20, label: 'Bank Keys' }],
+     selectionField: [{ position: 20 }]}
+  Bankl;
+
+  @UI: { lineItem: [{ position: 30, label: 'Bank account number' }],
+     identification: [{ position: 30, label: 'Bank account number' }],
+     selectionField: [{ position: 30 }]}
+  Bankn;
+
+  @UI: { lineItem: [{ position: 40, label: 'Bank Control Key' }],
+    identification: [{ position: 40, label: 'Bank Control Key' }],
+    selectionField: [{ position: 40 }]}
+  Bkont;
+
+  @UI: { lineItem: [{ position: 50, label: 'IBAN (International Bank Account Number)' }],
+  identification: [{ position: 50, label: 'IBAN (International Bank Account Number)' }] }
+  Iban;
+
+  @UI: { lineItem: [{ position: 60, label: 'Validity Start of IBAN' }],
+      identification: [{ position: 60, label: 'Validity Start of IBAN' }] }
+  ValidFrom;
+
+  @UI: { lineItem: [{ position: 70, label: 'Name of person who created the object' }],
+    identification: [{ position: 70, label: 'Name of person who created the object' }] }
+  ernam;
+  
+  @UI: { lineItem: [{ position: 80, label: 'Date on which the record was created' }],
+    identification: [{ position: 80, label: 'Date on which the record was created' }] }
+  erdat;
+  
+  @UI: { lineItem: [{ position: 90, label: 'Table name, 16 characters' }],
+  identification: [{ position: 90, label: 'Table name, 16 characters' }] }
+  tabname;
+  
+  @UI: { lineItem: [{ position: 100, label: 'IBAN origin: Key to table of bank detail' }],
+  identification: [{ position: 100, label: 'IBAN origin: Key to table of bank detail' }] }
+  tabkey;
+}
