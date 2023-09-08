@@ -1,0 +1,24 @@
+@Metadata.layer: #CORE
+
+@UI: { headerInfo: { typeName: 'Country Key',
+                     typeNamePlural: 'Country Keys',
+                     title: { type: #STANDARD, label: 'Country Keys' } },
+       presentationVariant: [ { sortOrder: [{by: 'Banks', direction: #ASC}] } ]}
+                     
+annotate view ZC_Banks
+    with 
+{
+  @UI.facet: [{id: 'idBanks',
+               type: #IDENTIFICATION_REFERENCE,
+               label: 'Country Keys',
+               position: 10 },
+
+               { id: 'idIBAN',
+                 type: #LINEITEM_REFERENCE,
+                 label: 'IBAN',
+                 position: 20,
+                 targetElement: '_IBAN'}]
+                 
+  @UI: { lineItem: [{ position: 10, label: 'Country/Region Key of Bank' }]}
+  Banks;
+}

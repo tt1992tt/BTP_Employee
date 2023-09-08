@@ -1,8 +1,7 @@
 @EndUserText.label: 'Consumption view for IBAN'
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @Metadata.allowExtensions: true
-define root view entity ZC_BusinessPartnerIBAN 
-  provider contract transactional_query
+define view entity ZC_BusinessPartnerIBAN 
   as projection on ZI_BusinessPartnerIBAN 
 {
       @EndUserText.label: 'Country/Region Key of Bank'
@@ -18,6 +17,7 @@ define root view entity ZC_BusinessPartnerIBAN
       Iban,
       @EndUserText.label: 'Validity Start of IBAN'
       ValidFrom,
-      LastChangedAt,
-      LocalLastChangedAt
+//      LastChangedAt,
+//      LocalLastChangedAt,
+      _Banks: redirected to parent ZC_Banks
 }

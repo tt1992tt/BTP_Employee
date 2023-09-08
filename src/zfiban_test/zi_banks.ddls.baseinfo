@@ -3,11 +3,11 @@
 {
 "FROM":
 [
-"ZTIBAN"
+"ZBANKS"
 ],
 "ASSOCIATED":
 [
-"ZI_BANKS"
+"ZI_BUSINESSPARTNERIBAN"
 ],
 "BASE":
 [],

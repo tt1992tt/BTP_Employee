@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for BP IBAN'
+define service ZSD_BANKS {
+  expose ZC_Banks;
+  expose ZC_BusinessPartnerIBAN;
+}

@@ -3,8 +3,10 @@
 @EndUserText.label: 'Interface view for IBAN'
 @Metadata.ignorePropagatedAnnotations: true
 
-define root view entity ZI_BusinessPartnerIBAN
+define view entity ZI_BusinessPartnerIBAN
   as select from ztiban
+  association to parent ZI_Banks as _Banks
+  on $projection.Banks = _Banks.Banks
 {
   key banks              as Banks,
   key bankl              as Bankl,
@@ -16,8 +18,9 @@ define root view entity ZI_BusinessPartnerIBAN
       erdat              as Erdat,
       tabname            as Tabname,
       tabkey             as Tabkey,
-      @Semantics.systemDateTime.lastChangedAt: true
-      lastchangedat      as LastChangedAt,
-      @Semantics.systemDateTime.localInstanceLastChangedAt: true
-      locallastchangedat as LocalLastChangedAt
+//      @Semantics.systemDateTime.lastChangedAt: true
+//      lastchangedat      as LastChangedAt,
+//      @Semantics.systemDateTime.localInstanceLastChangedAt: true
+//      locallastchangedat as LocalLastChangedAt,
+      _Banks
 }

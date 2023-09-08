@@ -1,0 +1,46 @@
+managed implementation in class zbp_i_banks unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_Banks alias Banks
+persistent table zbanks
+draft table zdrbanks
+lock master total etag Lastchangedat
+authorization master ( instance )
+{
+  create;
+  internal update;
+  delete;
+  field ( readonly ) Lastchangedat, Lastchangedby;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  association _IBAN { create; with draft; }
+
+  mapping for zbanks {
+                Banks = banks; } }
+
+
+define behavior for ZI_BusinessPartnerIBAN alias IBAN
+persistent table ztiban
+draft table zdrtiban
+lock dependent by _Banks
+authorization dependent by _Banks
+{
+  update;
+  delete;
+  field ( readonly ) Banks;
+  field ( readonly:update ) ValidFrom, Iban;
+  association _Banks;
+
+  mapping for ztiban {
+  Bankl = bankl;
+  Bankn = bankn;
+  Banks = banks;
+  Bkont = bkont;
+  ValidFrom = valid_from; }
+}
