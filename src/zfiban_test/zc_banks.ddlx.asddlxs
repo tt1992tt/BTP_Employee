@@ -4,13 +4,23 @@
                      typeNamePlural: 'Country Keys',
                      title: { type: #STANDARD, label: 'Country Keys' } },
        presentationVariant: [ { sortOrder: [{by: 'Banks', direction: #ASC}] } ]}
-                     
-annotate view ZC_Banks
-    with 
+
+annotate view ZC_Banks with
 {
-  @UI.facet: [{id: 'idBanks',
+  @UI.facet:
+
+  [{
+      label: 'General Information',
+      id: 'GeneralInfo',
+      type: #COLLECTION,
+      position: 10
+    },
+
+    {id: 'idBanks',
                type: #IDENTIFICATION_REFERENCE,
                label: 'Country Keys',
+               purpose: #STANDARD,
+               parentId: 'GeneralInfo',
                position: 10 },
 
                { id: 'idIBAN',
@@ -18,7 +28,8 @@ annotate view ZC_Banks
                  label: 'IBAN',
                  position: 20,
                  targetElement: '_IBAN'}]
-                 
-  @UI: { lineItem: [{ position: 10, label: 'Country/Region Key of Bank' }]}
+
+  @UI: { lineItem: [{ position: 10, label: 'Country/Region Key of Bank' }],
+  identification: [{ position: 10 }]}
   Banks;
 }
