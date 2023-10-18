@@ -75,17 +75,16 @@ CLASS lhc_Empleados_entity IMPLEMENTATION.
     WITH CORRESPONDING #( keys )
     RESULT DATA(i_startDates).
 
-    LOOP AT i_startDates INTO DATA(lw_startDates).
+    LOOP AT i_startDates REFERENCE INTO DATA(lw_startDates).
 
-      IF lw_startDates-StartDate EQ cl_abap_context_info=>get_system_date(  ).
-        APPEND VALUE #( %tky = lw_startDates-%tky ) TO failed-empleados_entity.
-        APPEND VALUE #( %tky = lw_startDates-%tky
+      IF lw_startDates->StartDate EQ cl_abap_context_info=>get_system_date(  ).
+        APPEND VALUE #( %tky = lw_startDates->%tky ) TO failed-empleados_entity.
+        APPEND VALUE #( %tky = lw_startDates->%tky
                         %msg = new_message_with_text( text = 'Start date cant be the actual date'
                                                       severity = if_abap_behv_message=>severity-error ) )
                                                       TO reported-empleados_entity.
       ENDIF.
-
-      CLEAR lw_startDates.
+      CLEAR lw_startdates.
     ENDLOOP.
 
   ENDMETHOD.
@@ -99,9 +98,9 @@ CLASS lhc_Empleados_entity IMPLEMENTATION.
     WITH CORRESPONDING #( keys )
     RESULT DATA(i_roles).
 
-    LOOP AT i_roles INTO DATA(lw_roles).
+    LOOP AT i_roles REFERENCE INTO FINAL(lw_roles).
 
-      DATA(lv_category) = SWITCH #( lw_roles-Role
+      DATA(lv_category) = SWITCH #( lw_roles->Role
                                     WHEN 'Software Engineer'
                                         THEN 'IT/Communications'
                                     WHEN 'Accounting'
@@ -116,10 +115,9 @@ CLASS lhc_Empleados_entity IMPLEMENTATION.
           IN LOCAL MODE
           ENTITY Empleados_entity
           UPDATE FIELDS ( Category )
-          WITH VALUE #( ( %tky = lw_roles-%tky
+          WITH VALUE #( ( %tky = lw_roles->%tky
                          Category = lv_category ) ).
-      CLEAR: lv_category,
-             lw_roles.
+      CLEAR lv_category.
     ENDLOOP.
 
   ENDMETHOD.

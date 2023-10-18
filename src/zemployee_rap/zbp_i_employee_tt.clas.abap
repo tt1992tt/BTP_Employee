@@ -1,5 +1,9 @@
 CLASS zbp_i_employee_tt DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_employee_tt.
+protected section.
+private section.
 ENDCLASS.
 
-CLASS zbp_i_employee_tt IMPLEMENTATION.
+
+
+CLASS ZBP_I_EMPLOYEE_TT IMPLEMENTATION.
 ENDCLASS.

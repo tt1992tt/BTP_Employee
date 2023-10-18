@@ -1,0 +1,25 @@
+projection;
+strict;
+use draft;
+
+define behavior for ZC_IBAN_S alias IbanAll
+
+{
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action SelectCustomizingTransptReq;
+
+  use association _TIBAN { create; with draft; }
+}
+
+define behavior for ZC_IBAN alias TIBAN
+
+{
+  use update;
+  use delete;
+
+  use association _IbanAll { with draft; }
+}

@@ -1,0 +1,4 @@
+define service ZUI_IBAN {
+  expose ZC_IBAN_S as IbanAll;
+  expose ZC_IBAN as TIBAN;
+}

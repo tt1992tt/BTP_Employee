@@ -1,0 +1,74 @@
+managed with additional save implementation in class ZBP_I_IBAN_S unique;
+strict;
+with draft;
+
+define behavior for ZI_IBAN_S alias IbanAll
+draft table ZDRTIBAN_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  field ( readonly )
+   SingletonID;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _TIBAN { create ( features : instance ); with draft; }
+}
+
+define behavior for ZI_IBAN alias TIBAN
+persistent table ZTIBAN
+draft table ZDRTIBAN
+etag master Lastchangedat
+lock dependent by _IbanAll
+authorization dependent by _IbanAll
+
+{
+  field ( mandatory : create )
+   Banks,
+   Bankl,
+   Bankn,
+   Bkont;
+
+  field ( readonly )
+   SingletonID,
+   Lastchangedat,
+   Lastchangedby;
+
+  field ( readonly : update )
+   Banks,
+   Bankl,
+   Bankn,
+   Bkont;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZTIBAN
+  {
+    Banks = BANKS;
+    Bankl = BANKL;
+    Bankn = BANKN;
+    Bkont = BKONT;
+    Iban = IBAN;
+    ValidFrom = VALID_FROM;
+    Lastchangedat = LASTCHANGEDAT;
+    Lastchangedby = LASTCHANGEDBY;
+  }
+
+  association _IbanAll { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

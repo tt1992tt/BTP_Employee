@@ -17,7 +17,9 @@ CLASS zcl_rapbo_test DEFINITION
 ENDCLASS.
 
 
-CLASS zcl_rapbo_test IMPLEMENTATION.
+
+CLASS ZCL_RAPBO_TEST IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
 
@@ -63,5 +65,4 @@ CLASS zcl_rapbo_test IMPLEMENTATION.
 * out->write_html
 
   ENDMETHOD.
-
 ENDCLASS.

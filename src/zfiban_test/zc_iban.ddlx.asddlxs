@@ -1,0 +1,79 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'TIBAN', 
+    typeNamePlural: 'TIBANs', 
+    title: {
+      type: #STANDARD, 
+      label: 'IBAN', 
+      value: 'Banks'
+    }
+  }
+}
+annotate view ZC_IBAN with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_IBAN', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'IBAN', 
+    position: 1 
+  } ]
+  Banks;
+  
+  @UI.identification: [ {
+    position: 2 , 
+    label: 'Bankl'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'Bankl'
+  } ]
+  Bankl;
+  
+  @UI.identification: [ {
+    position: 3 , 
+    label: 'Bankn'
+  } ]
+  @UI.lineItem: [ {
+    position: 3 , 
+    label: 'Bankn'
+  } ]
+  Bankn;
+  
+  @UI.identification: [ {
+    position: 4 , 
+    label: 'Bkont'
+  } ]
+  @UI.lineItem: [ {
+    position: 4 , 
+    label: 'Bkont'
+  } ]
+  Bkont;
+  
+  @UI.identification: [ {
+    position: 5 , 
+    label: 'Iban'
+  } ]
+  @UI.lineItem: [ {
+    position: 5 , 
+    label: 'Iban'
+  } ]
+  Iban;
+  
+  @UI.identification: [ {
+    position: 6 , 
+    label: 'ValidFrom'
+  } ]
+  @UI.lineItem: [ {
+    position: 6 , 
+    label: 'ValidFrom'
+  } ]
+  ValidFrom;
+}

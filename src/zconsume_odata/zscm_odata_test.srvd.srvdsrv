@@ -1,0 +1,5 @@
+@EndUserText.label: 'ZSCM_ODATA_TEST'
+@OData.schema.name: 'ZACDOCA_CDS_CDS'
+define service ZSCM_ODATA_TEST {
+ expose ZRAP_1234ZACDOCA_CDS; 
+ } 
